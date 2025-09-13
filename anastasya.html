@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <title>Tugas 3 PBO</title>
+<style>
+  /* ===== RESET & DASAR ===== */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(to bottom right, #fbd7e3, #f7f9fc);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 30px;
+  }
+
+  /* ===== CONTAINER ===== */
+  .container {
+    background: #ffffff;
+    padding: 25px 30px;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    width: 500px;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .container:hover {
+    transform: scale(1.01);
+  }
+
+  /* ===== JUDUL ===== */
+  h1 {
+    text-align: center;
+    color: #af4c9e;
+    font-size: 28px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+
+  h2, h3 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  /* ===== FORM ===== */
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px;
+    color: #444;
+    font-size: 15px;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 18px;
+    border: 2px solid #e0d5e6;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: 0.3s ease;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: #af4c9e;
+    box-shadow: 0 0 5px rgba(175, 76, 158, 0.5);
+  }
+
+  /* ===== BUTTON ===== */
+  button {
+    width: 100%;
+    padding: 12px;
+    background: #af4c9e;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.1s ease-in-out;
+  }
+
+  button:hover {
+    background: #d442c8;
+    transform: translateY(-2px);
+  }
+
+  /* ===== HASIL CERITA ===== */
+  #hasilCerita {
+    margin-top: 25px;
+    padding: 20px;
+    background: #fff6fb;
+    border-left: 6px solid #af4c9e;
+    border-radius: 12px;
+    line-height: 1.6;
+    box-shadow: inset 0 0 10px rgba(175, 76, 158, 0.05);
+  }
+
+  #hasilCerita h2 {
+    text-align: center;
+    color: #af4c9e;
+    margin-bottom: 15px;
+  }
+
+  #hasilCerita h3 {
+    margin-top: 15px;
+    color: #d442c8;
+  }
+
+  #hasilCerita p {
+    margin-bottom: 12px;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Cerita Ku</h1>
+
+    <script>
+    var yakin = confirm("Kamu yakin tetap ingin buka form ini?");
+      if (yakin) {
+        alert('Silakan membuat form sendiri');
+      } else {
+        window.location = "https://www.detik.com";
+      }
+      </script>
+
+     <!-- Form input -->
+    <form id="FormTasya">
+      <label>Nama :</label>
+      <input type="text" id="nama" placeholder="Nama Pelaku" required>
+
+      <label>Kelas :</label>
+      <input type="text" id="kelas" placeholder="Contoh: 12 rpl 1" required>
+
+      <label>Sahabat :</label>
+      <input type="text" id="sahabat" placeholder="Sahabat Pelaku" required>
+
+      <label>Waktu :</label>
+      <input type="text" id="waktu" placeholder="Contoh: 06:00" required>
+
+      <label>Sarapan :</label>
+      <input type="text" id="sarapan" placeholder="Contoh: Roti & Susu" required>
+
+      <button type="submit">Tampilkan Cerita</button>
+    </form>
+
+    <div id="hasilCerita" style="display:none;"></div>
+  </div>
+
+  <!-- Pastikan nama file tidak ada spasi -->
+  <script src="pagi.js"></script>
+  <script src="berangkat-sekolah.js"></script>
+  <script src="sekolah.js"></script>
+
+  <script>
+    const form = document.getElementById("FormTasya");
+    const hasil = document.getElementById("hasilCerita");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      // Ambil data dari input
+      const nama = document.getElementById("nama").value;
+      const kelas = document.getElementById("kelas").value;
+      const sahabat = document.getElementById("sahabat").value;
+      const waktu = document.getElementById("waktu").value;
+      const sarapan = document.getElementById("sarapan").value;
+
+      // Gabungkan cerita dari 3 file JS
+      const ceritaHTML = `
+        <h2>CERITA HARIAN</h2>
+        ${ceritapagi(nama, sarapan)}
+        ${ceritaberangkat(waktu, nama, sahabat)}
+        ${ceritasekolah(nama, sahabat, kelas)}
+      `;
+
+      hasil.style.display = "block";
+      hasil.innerHTML = ceritaHTML;
+    });
+  </script>
+</body>
+</html>
